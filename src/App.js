@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+
+import React, { useState } from "react";
+import Header from "./components/Header";
+import Register from "./components/Register";
+import Main from "./components/Main";
 
 function App() {
+
+  const [isRegistered,setIsRegistered] = useState(false)
+ 
+  function handleRegistered(){
+    setIsRegistered(prevRegistered => !prevRegistered)
+  }
+
+  console.log(isRegistered)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <Header isRegistered = {isRegistered} submit = {handleRegistered}/>
+      {/* {isRegistered ? <Register/> : "" }
+      <Main/> */}
+      
+
     </div>
   );
 }
