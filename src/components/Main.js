@@ -1,59 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-export default function Main() {
-    
+export default function Main(props) {
+  
+  const handleAddTrade = () => {
+    props.newTrade()
+  };
 
-    const [trades,setTrades] = useState([
-        { id: "", pair: "" , timeFrame: "" , direction: "", risk: "", profit:"" , pnl: "" , url:"" ,date: "" }
-    ])
+  const handleDeleteTrade = () => {
+    props.deleteTrade()
+  }
+  
 
-    function handleInputChange(event,tradeId){
-
-        const {name,value} = event.target
-
-        const updatedTrades = trades.map(trade => {
-            if(trade.id === tradeId){
-                return{
-                    ...trade,
-                    [name] : value
-                }
-            }
-            return trade
-        })
-        setTrades(updatedTrades)
-        
-    }
-
-    useEffect(function(){
-
-        console.log("trade updated")
-    },[trades])
-
-    
-    return (
-        <div className="trade-table-container">
-            <table className="trade-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Pair</th>
-                        <th>Time Frame</th>
-                        <th>Direction</th>
-                        <th>Risk</th>
-                        <th>Profit(R)</th>
-                        <th>PNL</th>
-                        <th>Setup Link</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-          {trades.map((trade) => (
+  return (
+    <div className="main-container">
+      <table className="trade-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Pair</th>
+            <th>Time Frame</th>
+            <th>Direction</th>
+            <th>Risk</th>
+            <th>Profit(R)</th>
+            <th>PNL</th>
+            <th>Setup Link</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.trades.map((trade) => (
             <tr key={trade.id}>
               <td>
                 <input
                   type="text"
                   value={trade.id}
-                  onChange={handleInputChange}
+                  onChange={(event) =>
+                    props.handleChange(event, trade.id)
+                  }
                   name="id"
                 />
               </td>
@@ -61,7 +45,9 @@ export default function Main() {
                 <input
                   type="text"
                   value={trade.pair}
-                  onChange={handleInputChange}
+                  onChange={(event) =>
+                    props.handleChange(event, trade.id)
+                  }
                   name="pair"
                 />
               </td>
@@ -69,7 +55,9 @@ export default function Main() {
                 <input
                   type="text"
                   value={trade.timeFrame}
-                  onChange={handleInputChange}
+                  onChange={(event) =>
+                    props.handleChange(event, trade.id)
+                  }
                   name="timeFrame"
                 />
               </td>
@@ -77,7 +65,9 @@ export default function Main() {
                 <input
                   type="text"
                   value={trade.direction}
-                  onChange={handleInputChange}
+                  onChange={(event) =>
+                    props.handleChange(event, trade.id)
+                  }
                   name="direction"
                 />
               </td>
@@ -85,7 +75,9 @@ export default function Main() {
                 <input
                   type="text"
                   value={trade.risk}
-                  onChange={handleInputChange}
+                  onChange={(event) =>
+                    props.handleChange(event, trade.id)
+                  }
                   name="risk"
                 />
               </td>
@@ -93,7 +85,9 @@ export default function Main() {
                 <input
                   type="text"
                   value={trade.profit}
-                  onChange={handleInputChange}
+                  onChange={(event) =>
+                    props.handleChange(event, trade.id)
+                  }
                   name="profit"
                 />
               </td>
@@ -101,7 +95,9 @@ export default function Main() {
                 <input
                   type="text"
                   value={trade.pnl}
-                  onChange={handleInputChange}
+                  onChange={(event) =>
+                    props.handleChange(event, trade.id)
+                  }
                   name="pnl"
                 />
               </td>
@@ -109,7 +105,9 @@ export default function Main() {
                 <input
                   type="text"
                   value={trade.url}
-                  onChange={handleInputChange}
+                  onChange={(event) =>
+                    props.handleChange(event, trade.id)
+                  }
                   name="url"
                 />
               </td>
@@ -117,18 +115,29 @@ export default function Main() {
                 <input
                   type="text"
                   value={trade.date}
-                  onChange={handleInputChange}
+                  onChange={(event) =>
+                    props.handleChange(event, trade.id)
+                  }
                   name="date"
                 />
               </td>
-              
+              <td>
+                <div className="add-trade-section">
+                  <button className="add-trade-btn" onClick={handleAddTrade}>
+                           +
+                  </button>
+                </div>
+                <div className="add-trade-section">
+                  <button className="delete-trade-btn" onClick={(event) => props.deleteTrade(event,trade.id)}>
+                           -
+                  </button>
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>
-                
-                
-            </table>
-        </div>
-    )
+      </table>
+      
+    </div>
+  );
 }
-
