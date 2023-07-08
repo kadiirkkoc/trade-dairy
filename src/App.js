@@ -4,10 +4,12 @@ import Header from "./components/Header";
 import Register from "./components/Register";
 import Main from "./components/Main";
 
+
 function App() {
 
-  const [trades, setTrades] = useState(
-    () => JSON.parse(localStorage.getItem("trades") || []))  
+  const [trades, setTrades] = useState([]) 
+// () => JSON.parse(localStorage.getItem("trades")
+
 
   const [currentTradeId, setCurrentTradeId] = useState(
     (trades[0] && trades[0].id || "")
@@ -67,9 +69,12 @@ function App() {
     console.log('Button clicked!');
   }
 
+
+
   return (
-    <div className="App">
-      <Header/>
+    <div className="App" >
+      {/* <Header/> */}
+      {/* <ForexSlider/> */}
       {
         trades.length > 0 ?
           <Main

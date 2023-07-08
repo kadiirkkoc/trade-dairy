@@ -1,12 +1,10 @@
 import React from "react";
-import flag from "../images/flag.png"
 
 export default function Header(props){
     return (
         <>
         <div className="header">
             <div className="userInfo">
-                <img className="turkish-flag" alt="turkish" src={flag}/>
                 <h1 className="username">Kadir</h1>
             </div>
             <h1 className="header-title">Trade Dairy</h1>

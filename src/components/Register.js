@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Main from "./Main";
 
 export default function Register(props) {
 
@@ -10,7 +11,6 @@ export default function Register(props) {
         re_password: ""
     })
 
-    const [user,setUser] = useState(localStorage.setItem)
 
     const [isSubmitted, setIsSubmitted] = useState(false)
 
@@ -25,14 +25,11 @@ export default function Register(props) {
         })
     }
 
-    function handleSignUpClick(){
-        props.setShowForm(true)
-    }
-
     const handleSubmit = (event) => {
         event.preventDefault()
         console.log(signUpForm)
         setIsSubmitted(true)
+        props.setShowForm(true)
     }
 
 
@@ -115,9 +112,15 @@ export default function Register(props) {
                     :
                     (<button 
                         className="signUp" 
-                        onClick={handleSignUpClick}
+                        onClick={handleSubmit}
                     >
                         Sign up for free
+
+                        {
+                            <>
+                                {isSubmitted ? <Main /> : "none"}
+                            </>
+                        }
                     </button>
                     )
             }
